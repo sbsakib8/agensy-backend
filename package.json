@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@types/mongodb": "^4.0.6",
+    "axios": "latest",
+    "cookie-parser": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "firebase": "^12.8.0",
+    "firebase-admin": "latest",
+    "jsonwebtoken": "latest",
+    "mongodb": "^7.0.0",
+    "nodemailer": "^7.0.12"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/nodemailer": "^7.0.5",
+    "ts-node-dev": "latest",
+    "typescript": "latest"
+  }
+}
