@@ -83,7 +83,6 @@ app.use('/api/users', userManagementRoutes)
 
 // Mount product routes
 app.use('/api/products', productRoutes)
-app.use('/api/products', productRoutes)
 
 // Mount pricing routes
 app.use('/api/pricing', pricingRoutes)
