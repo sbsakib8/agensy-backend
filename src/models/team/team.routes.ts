@@ -11,7 +11,8 @@ import {
   createDepartment,
   deleteDepartment,
   // Utility routes
-  getDepartments
+  getDepartments,
+  updateDepartment
 } from "./team.controller";
 import { verifyToken, requireAdmin } from "../../middlewares/auth.middleware";
 
@@ -32,6 +33,7 @@ router.delete("/:id", verifyToken, requireAdmin, deleteTeamMember);
 
 // Admin-only routes for departments
 router.post("/departments", verifyToken, requireAdmin, createDepartment);
+router.put("/departments/:id", verifyToken, requireAdmin, updateDepartment);
 router.delete("/departments/:name", verifyToken, requireAdmin, deleteDepartment);
 
 export default router;
