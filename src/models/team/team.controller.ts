@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { ObjectId } from "mongodb";
 import { connectDB } from "../../config/db";
-import { TeamMember, Department, TeamFilters } from "./team.model";
+import { TeamMember, Department, TeamFilters } from './team.model';
 
 // Helper function to ensure id is a string
 const getIdAsString = (id: string | string[]): string => {
@@ -293,6 +293,51 @@ export const createDepartment = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateDepartment = async (req: Request<{ id: string }, {}, Partial<Omit<Department, "_id">>>, res: Response<{
+  success: boolean;
+  message: string;
+}>) => {
+  try {
+    const _id = new ObjectId(req.params.id);
+    const { name, description } = req.body;
+
+    const db =  await connectDB();
+
+    const existingDepartment = await db.collection("departments").findOne({ _id });
+
+    if(!existingDepartment){
+      return res.status(404).json({
+        success: false,
+        message: "Department not found"
+      });
+    }
+
+    await db.collection("departments").updateOne(
+      { _id },
+      {
+        $set: {
+          name: name?.trim() || existingDepartment.name,
+          description: description?.trim() || existingDepartment.description,
+          updatedAt: new Date()
+        }
+      }
+    );
+
+    return res.json({
+      success: true,
+      message: "Department updated successfully"
+    });
+  } catch (error: unknown) {
+
+    console.error("Error updating department: ", error);
+
+   return res.status(500).json({
+      success: false,
+      message: "Failed to update department",
+    })
+  }
+}
 
 export const deleteDepartment = async (req: Request, res: Response) => {
   try {

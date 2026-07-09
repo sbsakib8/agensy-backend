@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 app.use(express.json())
 app.use(cookieParser())
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 
 // Initialize database connections
 const initializeDatabases = async () => {
