@@ -26,9 +26,14 @@ router.patch("/categories/:id", verifyToken, requireAdmin, updateProjectCategory
 router.delete("/categories/:id", verifyToken, requireAdmin, deleteProjectCategory);
 
 // Admin-only routes for project management within categories
-router.post("/categories/:categoryId/projects", verifyToken, requireAdmin, addProjectToCategory);
-router.put("/categories/:categoryId/projects/:projectId", verifyToken, requireAdmin, updateProjectInCategory);
+router.post("/categories/:categoryId", verifyToken, requireAdmin, addProjectToCategory);
+router.put(
+  "/:projectId/categories/:categoryId",
+  verifyToken,
+  requireAdmin,
+  updateProjectInCategory,
+);
 router.patch("/categories/:categoryId/projects/:projectId", verifyToken, requireAdmin, updateProjectInCategory);
-router.delete("/categories/:categoryId/projects/:projectId", verifyToken, requireAdmin, removeProjectFromCategory);
+router.delete("/:projectId/categories/:categoryId", verifyToken, requireAdmin, removeProjectFromCategory);
 
 export default router;

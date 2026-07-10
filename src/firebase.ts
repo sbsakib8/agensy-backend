@@ -93,7 +93,7 @@ export async function verifyIdTokenMiddleware(req: Request, res: Response, next:
   try {
     const decoded = await auth.verifyIdToken(idToken, true)
     console.log('✅ Token verified successfully:', { uid: decoded.uid, email: decoded.email });
-    ;(req as any).firebaseUser = decoded
+    (req as any).firebaseUser = decoded
     return next()
   } catch (err: any) {
     console.error('❌ Token verification failed:', err.code, err.message);
